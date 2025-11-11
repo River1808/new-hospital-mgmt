@@ -1,7 +1,30 @@
 package hospital.staffClasses;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "employees")
+
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "role" 
+)
+@JsonSubTypes({
+
+    @JsonSubTypes.Type(value = Doctor.class, name = "Doctor"),
+    @JsonSubTypes.Type(value = Nurse.class, name = "Nurse"),
+    @JsonSubTypes.Type(value = MaintenanceStaff.class, name = "MaintenanceStaff")
+})
+
+
 public abstract class Employee {
-    private int id;
+
+    @Id
+    private int id; 
+
     private String name;
     private String department;
     private String role;
@@ -13,7 +36,10 @@ public abstract class Employee {
         this.role = role;
     }
 
-    // Encapsulation: 
+    public Employee() {
+    }
+
+    // --- Getters and Setters ---
     public int getId() {
         return id;
     }
@@ -45,11 +71,11 @@ public abstract class Employee {
     public void setRole(String role) {
         this.role = role;
     }
-    //final method
+    
     public final void displayEmployeeID() {
         System.out.println("Employee ID: " + id);
     }
-    // Abstract methods
+
     public abstract String getDetails();
 
     public abstract String getWorkingDays();

@@ -3,9 +3,14 @@ package hospital.staffClasses;
 public class Nurse extends Employee{
     private String dutyArea;
     private boolean onDuty;
-    // Constructor
+
+    // This is REQUIRED by Spring for fetching data from the database.
+    public Nurse() {
+        super();
+    }
+    
     public Nurse(int id, String name, String department, String dutyArea) {
-        super(id, name, department, "Nurses");
+        super(id, name, department, "Nurses"); // This "Nurses" role is correct
         this.dutyArea = dutyArea;
         this.onDuty = false; //default
     }
@@ -26,15 +31,14 @@ public class Nurse extends Employee{
     public void setOnDuty(boolean onDuty) {
         this.onDuty = onDuty;
     }
-    // Override method from Employee
+
     @Override
     public String getDetails() {
-        return "Maintenance Staff: " + getName()
+        return "Nurse: " + getName()
                 + " Department: " + getDepartment()
                 + " Duty Area: " + dutyArea
                 + " On Duty: " + (onDuty ? "Yes" : "No");
     }
-    // Override method to define specific working schedule
     @Override
     public String getWorkingDays() {
         return "Nurses work 6 days per week with Sunday off.";

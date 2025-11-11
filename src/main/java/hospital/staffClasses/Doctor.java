@@ -4,7 +4,9 @@ public class Doctor extends Employee {
     private String specialtyArea;
     private boolean onDuty;
     private boolean emergencyCall;
-
+    public Doctor() {
+        super();
+    }
     public Doctor(int id, String name, String department, String specialtyArea, boolean emergencyCall) {
         super(id, name, department, "Doctor");
         this.specialtyArea = specialtyArea;

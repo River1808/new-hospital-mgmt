@@ -1,45 +1,54 @@
-/*----- Information about 1 shift ----- */
 package hospital.schedule;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+@Document(collection = "shifts") 
 public class Shift
 {
-    String shiftID; 
-    String eID; 
-    LocalDate date;
-    LocalTime startTime;
-    LocalTime endTime;
-    String role;
+    @Id
+    private String id; 
+
+    private int employeeId; 
+    private LocalDate date;
+    private LocalTime startTime;
+    private LocalTime endTime;
+    private String role;
+
+    // ADDED: No-argument constructor (required by Spring)
+    public Shift() {
+    }
 
     // Constructor
-    public Shift(String shiftID, String eID, LocalDate date, LocalTime startTime, LocalTime endTime, String role)
+    public Shift(int employeeId, LocalDate date, LocalTime startTime, LocalTime endTime, String role)
     {
-        this.shiftID = shiftID;
-        this.eID = eID; 
+        this.employeeId = employeeId;
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
         this.role = role;
     }
 
-    // Modify the shift (overloading method)
-    public void edit(LocalDate date)
-    {
-        this.date = date;
+    // --- Getters and Setters ---
+
+    public String getId() {
+        return id;
     }
 
-    public void edit(LocalTime startTime, LocalTime endTime)
-    {
-        this.startTime = startTime;
-        this.endTime = endTime;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    // Getters
-    public String getEmployeeID()
+    public int getEmployeeId()
     {
-        return eID;
+        return employeeId;
+    }
+
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 
     public LocalDate getDate()
@@ -47,9 +56,17 @@ public class Shift
         return date;
     }
 
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
     public LocalTime getStartTime()
     {
         return startTime;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
     }
 
     public LocalTime getEndTime()
@@ -57,9 +74,16 @@ public class Shift
         return endTime;
     }
 
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
+    }
+
     public String getRole()
     {
         return role;
     }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

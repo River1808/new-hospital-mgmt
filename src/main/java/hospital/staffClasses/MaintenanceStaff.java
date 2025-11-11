@@ -3,6 +3,9 @@ package hospital.staffClasses;
 public class MaintenanceStaff extends Employee{
     private String dutyArea;
     private boolean onDuty;
+    public MaintenanceStaff() {
+        super();
+    }
     // Constructor
     public MaintenanceStaff(int id, String name, String department, String dutyArea) {
         super(id, name, department, "Maintenance Staff");
