@@ -5,7 +5,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "employees")
+// This collection name MUST match your database
+@Document(collection = "employee") 
 
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
@@ -13,10 +14,19 @@ import org.springframework.data.mongodb.core.mapping.Document;
     property = "role" 
 )
 @JsonSubTypes({
-
+    // ADDED ALL THE DOCTOR SUBTYPES
     @JsonSubTypes.Type(value = Doctor.class, name = "Doctor"),
-    @JsonSubTypes.Type(value = Nurse.class, name = "Nurse"),
-    @JsonSubTypes.Type(value = MaintenanceStaff.class, name = "MaintenanceStaff")
+    @JsonSubTypes.Type(value = GP.class, name = "General Practitioner"),
+    @JsonSubTypes.Type(value = Cardiologist.class, name = "Cardiologist"),
+    @JsonSubTypes.Type(value = Psychiatrist.class, name = "Psychiatrist"),
+    @JsonSubTypes.Type(value = Radiologist.class, name = "Radiologist"),
+    @JsonSubTypes.Type(value = Neurologist.class, name = "Neurologist"),
+    @JsonSubTypes.Type(value = Anesthesiologist.class, name = "Anesthesiologist"),
+    @JsonSubTypes.Type(value = Surgeon.class, name = "Surgeon"),
+
+    // These are from your other classes
+    @JsonSubTypes.Type(value = Nurse.class, name = "Nurses"),
+    @JsonSubTypes.Type(value = MaintenanceStaff.class, name = "Maintenance Staff")
 })
 
 

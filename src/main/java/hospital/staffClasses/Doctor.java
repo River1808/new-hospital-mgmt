@@ -4,11 +4,26 @@ public class Doctor extends Employee {
     private String specialtyArea;
     private boolean onDuty;
     private boolean emergencyCall;
+
+    // MODIFIED: No-arg constructor calls super()
     public Doctor() {
         super();
     }
+
+    // MODIFIED: This constructor now accepts a 'role'
+    // This fixes the logic bug where all subclasses had the role "Doctor"
+    public Doctor(int id, String name, String department, String role, String specialtyArea, boolean emergencyCall) {
+        // This 'role' variable is passed up to Employee
+        super(id, name, department, role); 
+        this.specialtyArea = specialtyArea;
+        this.onDuty = false;
+        this.emergencyCall = emergencyCall;
+    }
+    
+    // This is a new constructor for creating a "generic" Doctor
     public Doctor(int id, String name, String department, String specialtyArea, boolean emergencyCall) {
-        super(id, name, department, "Doctor");
+        // This constructor hard-codes the role as "Doctor"
+        super(id, name, department, "Doctor"); 
         this.specialtyArea = specialtyArea;
         this.onDuty = false;
         this.emergencyCall = emergencyCall;
@@ -42,10 +57,10 @@ public class Doctor extends Employee {
     @Override
     public String getDetails() {
         return "Doctor: " + getName() +
-               " Department: " + getDepartment() +
-               " Specialty: " + specialtyArea +
-               " On Duty: " + (onDuty ? "Yes" : "No") +
-               " Emergency Call: " + (emergencyCall ? "Available" : "Not Available");
+                " Department: " + getDepartment() +
+                " Specialty: " + specialtyArea +
+                " On Duty: " + (onDuty ? "Yes" : "No") +
+                " Emergency Call: " + (emergencyCall ? "Available" : "Not Available");
     }
 
     @Override
@@ -59,44 +74,88 @@ public class Doctor extends Employee {
     }
 }
 
+// --- All Subclasses Now Have No-Arg Constructors ---
+
 class GP extends Doctor {
+    // ADDED: No-arg constructor
+    public GP() {
+        super();
+    }
+
+    // MODIFIED: This now passes the correct role ("General Practitioner") to the new constructor
     public GP(int id, String name, String department) {
-        super(id, name, department, "General Practitioner", false);
+        super(id, name, department, "General Practitioner", "General Practitioner", false);
     }
 }
 
 class Cardiologist extends Doctor {
+    // ADDED: No-arg constructor
+    public Cardiologist() {
+        super();
+    }
+    
+    // MODIFIED: This now passes the correct role
     public Cardiologist(int id, String name, String department) {
-        super(id, name, department, "Cardiologist", false);
+        super(id, name, department, "Cardiologist", "Cardiologist", false);
     }
 }
 
 class Psychiatrist extends Doctor {
+    // ADDED: No-arg constructor
+    public Psychiatrist() {
+        super();
+    }
+    
+    // MODIFIED: This now passes the correct role
     public Psychiatrist(int id, String name, String department) {
-        super(id, name, department, "Psychiatrist", true);
+        super(id, name, department, "Psychiatrist", "Psychiatrist", true);
     }
 }
 
 class Radiologist extends Doctor {
+    // ADDED: No-arg constructor
+    public Radiologist() {
+        super();
+    }
+    
+    // MODIFIED: This now passes the correct role
     public Radiologist(int id, String name, String department) {
-        super(id, name, department, "Radiologist", false);
+        super(id, name, department, "Radiologist", "Radiologist", false);
     }
 }
 
 class Neurologist extends Doctor {
+    // ADDED: No-arg constructor
+    public Neurologist() {
+        super();
+    }
+    
+    // MODIFIED: This now passes the correct role
     public Neurologist(int id, String name, String department) {
-        super(id, name, department, "Neurologist", true);
+        super(id, name, department, "Neurologist", "Neurologist", true);
     }
 }
 
 class Anesthesiologist extends Doctor {
+    // ADDED: No-arg constructor
+    public Anesthesiologist() {
+        super();
+    }
+    
+    // MODIFIED: This now passes the correct role
     public Anesthesiologist(int id, String name, String department) {
-        super(id, name, department, "Anesthesiologist", true);
+        super(id, name, department, "Anesthesiologist", "Anesthesiologist", true);
     }
 }
 
 class Surgeon extends Doctor {
+    // ADDED: No-arg constructor
+    public Surgeon() {
+        super();
+    }
+    
+    // MODIFIED: This now passes the correct role
     public Surgeon(int id, String name, String department) {
-        super(id, name, department, "Surgeon", true);
+        super(id, name, department, "Surgeon", "Surgeon", true);
     }
 }
