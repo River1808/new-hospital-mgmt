@@ -1,67 +1,75 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+// REMOVED: Link from react-router-dom
 
 function Employee() {
-  const [employees, setEmployees] = useState([]); 
-  const [loading, setLoading] = useState(true);
+  const [employees, setEmployees] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchEmployees = async () => {
-      try {
-        const response = await fetch('http://localhost:8080/api/employees');
-        
+    // This fetch URL is still correct
+    fetch('http://localhost:8080/api/employees')
+      .then(response => {
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error('Failed to fetch. Is your Java server running?');
         }
+        return response.json();
+      })
+      .then(data => {
+        setEmployees(data);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        setError(error.message);
+      });
+  }, []); // The empty array [] means "run this only once"
 
-        const data = await response.json();
-        setEmployees(data); // Save the employee data in state
-      } catch (err) {
-        setError(err.message);
-        console.error('Error fetching employees:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const containerStyle = {
+    fontFamily: 'Arial, sans-serif',
+    margin: '2rem',
+    padding: '2rem',
+    backgroundColor: '#f9f9f9',
+    borderRadius: '8px',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+  };
 
-    fetchEmployees();
-  }, []); 
+  const listStyle = {
+    listStyleType: 'none',
+    padding: 0,
+  };
 
-  if (loading) {
-    return <div>Loading employees...</div>;
-  }
+  const listItemStyle = {
+    backgroundColor: '#fff',
+    border: '1px solid #ddd',
+    padding: '1rem',
+    marginBottom: '1rem',
+    borderRadius: '4px',
+    boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
+  };
 
   if (error) {
-    return <div>Error: {error}. Is your Java server running?</div>;
+    return <div style={containerStyle}><h2>Error: {error}</h2></div>;
+  }
+
+  if (employees.length === 0) {
+    return <div style={containerStyle}><h2>Loading... or No Employees Found.</h2></div>;
   }
 
   return (
-    <div style={{ padding: '2rem' }}>
-      <h2>Employee List</h2>
+    <div style={containerStyle}>
+      <h2 style={{ borderBottom: '2px solid #007bff', paddingBottom: '0.5rem' }}>Employee List</h2>
       
-      {/* Link to go to the "Add Employee" form */}
-      <Link to="/employees/new">
-        <button style={{ marginBottom: '1rem' }}>Add New Employee</button>
-      </Link>
+      {/* --- REMOVED THE "ADD NEW EMPLOYEE" BUTTON --- */}
 
-      {/* Check if there are employees to show */}
-      {employees.length === 0 ? (
-        <p>No employees found. Add one!</p>
-      ) : (
-        <ul style={{ listStyleType: 'none', padding: 0 }}>
-          {/* Map over the employees in state and display them */}
-          {employees.map(employee => (
-            <li key={employee.id} style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '5px', borderRadius: '5px' }}>
-              <strong>{employee.name} (ID: {employee.id})</strong>
-              <br />
-              Role: {employee.role}
-              <br />
-              Department: {employee.department}
-            </li>
-          ))}
-        </ul>
-      )}
+      <ul style={listStyle}>
+        {employees.map(employee => (
+          <li key={employee.id || employee._id} style={listItemStyle}>
+            <strong>Name: {employee.name || 'N/A'}</strong>
+            <div>ID: {employee.id}</div>
+            <div>Department: {employee.department || 'N/A'}</div>
+            <div>Role: {employee.role || 'N/A'}</div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
