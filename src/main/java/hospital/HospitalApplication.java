@@ -23,6 +23,13 @@ public class HospitalApplication {
         System.out.println("---------------");
 
         // 3. Create a SpringApplication instance
+        SpringApplication app = getSpringApplication(dbHost);
+
+        // 6. Run the application
+        app.run(args);
+    }
+
+    private static SpringApplication getSpringApplication(String dbHost) {
         SpringApplication app = new SpringApplication(HospitalApplication.class);
 
         // 4. Create a map of properties to force Spring to use
@@ -34,8 +41,6 @@ public class HospitalApplication {
 
         // 5. Set these as the default properties
         app.setDefaultProperties(properties);
-        
-        // 6. Run the application
-        app.run(args);
+        return app;
     }
 }

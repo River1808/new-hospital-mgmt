@@ -9,8 +9,6 @@ import java.time.LocalDate;
 public class LeaveRequest {
 
     @Id
-    private String id; // Auto-generated MongoDB ID
-
     private int employeeId;
     private LocalDate startDate; 
     private LocalDate endDate;
@@ -32,14 +30,6 @@ public class LeaveRequest {
     }
 
     // --- Getters and Setters ---
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public int getEmployeeId()
     {
         return employeeId;

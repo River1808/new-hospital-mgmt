@@ -10,7 +10,7 @@ public class Nurse extends Employee{
     }
     
     public Nurse(int id, String name, String department, String dutyArea) {
-        super(id, name, department, "Nurses"); // This "Nurses" role is correct
+        super(id, name, department, "Nurse"); // This "Nurses" role is correct
         this.dutyArea = dutyArea;
         this.onDuty = false; //default
     }

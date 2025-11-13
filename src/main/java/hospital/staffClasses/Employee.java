@@ -6,34 +6,33 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 // This collection name MUST match your database
-@Document(collection = "employee") 
+@Document(collection = "employee")
 
 @JsonTypeInfo(
-    use = JsonTypeInfo.Id.NAME,
-    include = JsonTypeInfo.As.PROPERTY,
-    property = "role" 
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "role"
 )
 @JsonSubTypes({
-    // ADDED ALL THE DOCTOR SUBTYPES
-    @JsonSubTypes.Type(value = Doctor.class, name = "Doctor"),
-    @JsonSubTypes.Type(value = GP.class, name = "General Practitioner"),
-    @JsonSubTypes.Type(value = Cardiologist.class, name = "Cardiologist"),
-    @JsonSubTypes.Type(value = Psychiatrist.class, name = "Psychiatrist"),
-    @JsonSubTypes.Type(value = Radiologist.class, name = "Radiologist"),
-    @JsonSubTypes.Type(value = Neurologist.class, name = "Neurologist"),
-    @JsonSubTypes.Type(value = Anesthesiologist.class, name = "Anesthesiologist"),
-    @JsonSubTypes.Type(value = Surgeon.class, name = "Surgeon"),
+        // ADDED ALL THE DOCTOR SUBTYPES
+        @JsonSubTypes.Type(value = Doctor.class, name = "Doctor"),
+        @JsonSubTypes.Type(value = GP.class, name = "GP"),
+        @JsonSubTypes.Type(value = Cardiologist.class, name = "Cardiologist"),
+        @JsonSubTypes.Type(value = Psychiatrist.class, name = "Psychiatrist"),
+        @JsonSubTypes.Type(value = Radiologist.class, name = "Radiologist"),
+        @JsonSubTypes.Type(value = Neurologist.class, name = "Neurologist"),
+        @JsonSubTypes.Type(value = Anesthesiologist.class, name = "Anesthesiologist"),
+        @JsonSubTypes.Type(value = Surgeon.class, name = "Surgeon"),
 
-    // These are from your other classes
-    @JsonSubTypes.Type(value = Nurse.class, name = "Nurses"),
-    @JsonSubTypes.Type(value = MaintenanceStaff.class, name = "Maintenance Staff")
+        // These are from your other classes
+        @JsonSubTypes.Type(value = Nurse.class, name = "Nurse"),
+        @JsonSubTypes.Type(value = MaintenanceStaff.class, name = "Maintenance Staff")
 })
-
 
 public abstract class Employee {
 
     @Id
-    private int id; 
+    private int id;
 
     private String name;
     private String department;
@@ -81,7 +80,7 @@ public abstract class Employee {
     public void setRole(String role) {
         this.role = role;
     }
-    
+
     public final void displayEmployeeID() {
         System.out.println("Employee ID: " + id);
     }

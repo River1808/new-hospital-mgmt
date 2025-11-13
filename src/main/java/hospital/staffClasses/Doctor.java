@@ -84,7 +84,7 @@ class GP extends Doctor {
 
     // MODIFIED: This now passes the correct role ("General Practitioner") to the new constructor
     public GP(int id, String name, String department) {
-        super(id, name, department, "General Practitioner", "General Practitioner", false);
+        super(id, name, department, "GP", "GP", false);
     }
 }
 
