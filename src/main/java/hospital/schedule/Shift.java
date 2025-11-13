@@ -10,8 +10,6 @@ import java.time.LocalTime;
 public class Shift
 {
     @Id
-    private String id; 
-
     private int employeeId; 
     private LocalDate date;
     private LocalTime startTime;
@@ -33,15 +31,6 @@ public class Shift
     }
 
     // --- Getters and Setters ---
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public int getEmployeeId()
     {
         return employeeId;
