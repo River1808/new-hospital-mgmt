@@ -5,10 +5,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 
-@Document(collection = "leaveRequests") 
+@Document(collection = "leaveRequest") 
 public class LeaveRequest {
 
     @Id
+    private String id;
+
     private int employeeId;
     private LocalDate startDate; 
     private LocalDate endDate;

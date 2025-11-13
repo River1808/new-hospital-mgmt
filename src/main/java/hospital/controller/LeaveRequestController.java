@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/leaverequests")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:5173")
 public class LeaveRequestController {
 
     @Autowired
@@ -32,6 +32,7 @@ public class LeaveRequestController {
     
     @GetMapping("/employee/{employeeId}")
     public List<LeaveRequest> getLeaveRequestsByEmployee(@PathVariable int employeeId) {
+        // This method will now work because we will add it to the repository
         return leaveRequestRepository.findByEmployeeId(employeeId);
     }
 
