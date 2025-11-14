@@ -1,63 +1,24 @@
 package hospital.controller;
-
-import hospital.database.LeaveRequestRepository;
-import hospital.schedule.LeaveRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/api/leaverequests")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:5174") 
 public class LeaveRequestController {
 
+
     @Autowired
-    private LeaveRequestRepository leaveRequestRepository;
-
-    @PostMapping
-    public ResponseEntity<LeaveRequest> requestLeave(@RequestBody LeaveRequest leaveRequest) {
-        leaveRequest.setStatus("Pending");
-        LeaveRequest savedRequest = leaveRequestRepository.save(leaveRequest);
-        return new ResponseEntity<>(savedRequest, HttpStatus.CREATED);
-    }
-
-    @GetMapping
-    public List<LeaveRequest> getAllLeaveRequests() {
-        return leaveRequestRepository.findAll();
-    }
+    private MongoTemplate mongoTemplate;
     
-    @GetMapping("/employee/{employeeId}")
-    public List<LeaveRequest> getLeaveRequestsByEmployee(@PathVariable int employeeId) {
-        // This method will now work because we will add it to the repository
-        return leaveRequestRepository.findByEmployeeId(employeeId);
-    }
-
-
-    @PutMapping("/{id}/approve")
-    public ResponseEntity<LeaveRequest> approveLeave(@PathVariable String id) {
-        Optional<LeaveRequest> requestOpt = leaveRequestRepository.findById(id);
-        if (requestOpt.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        LeaveRequest request = requestOpt.get();
-        request.setStatus("Approved");
-        leaveRequestRepository.save(request);
-        return ResponseEntity.ok(request);
-    }
-
-    @PutMapping("/{id}/reject")
-    public ResponseEntity<LeaveRequest> rejectLeave(@PathVariable String id) {
-        Optional<LeaveRequest> requestOpt = leaveRequestRepository.findById(id);
-        if (requestOpt.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        LeaveRequest request = requestOpt.get();
-        request.setStatus("Rejected");
-        leaveRequestRepository.save(request);
-        return ResponseEntity.ok(request);
+    @GetMapping
+    public List<Object> getAllLeaveRequests() {
+        return mongoTemplate.findAll(Object.class, "leaveRequest");
     }
 }
