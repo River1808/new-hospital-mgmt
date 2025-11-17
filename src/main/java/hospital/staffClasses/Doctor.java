@@ -19,6 +19,15 @@ public class Doctor extends Employee {
         this.onDuty = false;
         this.emergencyCall = emergencyCall;
     }
+    
+    // This is a new constructor for creating a "generic" Doctor
+    public Doctor(int id, String name, String department, String specialtyArea, boolean emergencyCall) {
+        // This constructor hard-codes the role as "Doctor"
+        super(id, name, department, "Doctor"); 
+        this.specialtyArea = specialtyArea;
+        this.onDuty = false;
+        this.emergencyCall = emergencyCall;
+    }
 
     // Getters and setters
     public String getSpecialtyArea() {
