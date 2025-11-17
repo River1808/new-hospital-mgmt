@@ -3,12 +3,17 @@ package hospital.controller;
 import hospital.database.EmployeeRepository;
 import hospital.staffClasses.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate; // <-- 1. IMPORT THIS
+import org.springframework.data.mongodb.core.MongoTemplate; 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+// --- 1. IMPORT THESE TWO NEW CLASSES ---
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.query.Query;
+// --- END OF IMPORTS ---
 
 @RestController 
 @RequestMapping("/api/employees") 
@@ -19,23 +24,28 @@ public class EmployeeController {
     @Autowired 
     private EmployeeRepository employeeRepository;
 
-    // 2. ADD THE MONGO TEMPLATE
     @Autowired
     private MongoTemplate mongoTemplate;
 
-    // 3. THIS IS THE STABLE, WORKING METHOD
+    // --- 2. THIS METHOD IS NOW FIXED ---
     @GetMapping
     public List<Object> getAllEmployees() {
         
-        // --- 4. THIS IS THE DEBUG PRINTOUT ---
         System.out.println("--- DEBUG: getAllEmployees() method was called! ---");
         
-        // This is the simple workaround that we know works.
-        return mongoTemplate.findAll(Object.class, "employee");
+        // 1. Create a new query
+        Query query = new Query();
+
+        // 2. Tell the query to sort by your "id" field, Ascending
+        query.with(Sort.by(Sort.Direction.ASC, "id"));
+
+        // 3. Run the query
+        // This will now return your employees, sorted by their 'id'.
+        return mongoTemplate.find(query, Object.class, "employee");
     }
+    // --- END OF FIX ---
     
-    // Your "Add Employee" method (this will still have the "abstract class" error,
-    // but at least your "Get" will work)
+    
     @PostMapping
     public ResponseEntity<?> createEmployee(@RequestBody Employee employee) {
         try {
