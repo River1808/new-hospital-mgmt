@@ -12,7 +12,7 @@ public class Doctor extends Employee {
 
     // MODIFIED: This constructor now accepts a 'role'
     // This fixes the logic bug where all subclasses had the role "Doctor"
-    public Doctor(int id, String name, String department, String role, String specialtyArea, boolean emergencyCall) {
+    public Doctor(String id, String name, String department, String role, String specialtyArea, boolean emergencyCall) {
         // This 'role' variable is passed up to Employee
         super(id, name, department, role); 
         this.specialtyArea = specialtyArea;
@@ -21,7 +21,7 @@ public class Doctor extends Employee {
     }
     
     // This is a new constructor for creating a "generic" Doctor
-    public Doctor(int id, String name, String department, String specialtyArea, boolean emergencyCall) {
+    public Doctor(String id, String name, String department, String specialtyArea, boolean emergencyCall) {
         // This constructor hard-codes the role as "Doctor"
         super(id, name, department, "Doctor"); 
         this.specialtyArea = specialtyArea;
@@ -83,7 +83,7 @@ class GP extends Doctor {
     }
 
     // MODIFIED: This now passes the correct role ("General Practitioner") to the new constructor
-    public GP(int id, String name, String department) {
+    public GP(String id, String name, String department) {
         super(id, name, department, "GP", "GP", false);
     }
 }
@@ -95,7 +95,7 @@ class Cardiologist extends Doctor {
     }
     
     // MODIFIED: This now passes the correct role
-    public Cardiologist(int id, String name, String department) {
+    public Cardiologist(String id, String name, String department) {
         super(id, name, department, "Cardiologist", "Cardiologist", false);
     }
 }
@@ -107,7 +107,7 @@ class Psychiatrist extends Doctor {
     }
     
     // MODIFIED: This now passes the correct role
-    public Psychiatrist(int id, String name, String department) {
+    public Psychiatrist(String id, String name, String department) {
         super(id, name, department, "Psychiatrist", "Psychiatrist", true);
     }
 }
@@ -119,7 +119,7 @@ class Radiologist extends Doctor {
     }
     
     // MODIFIED: This now passes the correct role
-    public Radiologist(int id, String name, String department) {
+    public Radiologist(String id, String name, String department) {
         super(id, name, department, "Radiologist", "Radiologist", false);
     }
 }
@@ -131,7 +131,7 @@ class Neurologist extends Doctor {
     }
     
     // MODIFIED: This now passes the correct role
-    public Neurologist(int id, String name, String department) {
+    public Neurologist(String id, String name, String department) {
         super(id, name, department, "Neurologist", "Neurologist", true);
     }
 }
@@ -143,7 +143,7 @@ class Anesthesiologist extends Doctor {
     }
     
     // MODIFIED: This now passes the correct role
-    public Anesthesiologist(int id, String name, String department) {
+    public Anesthesiologist(String id, String name, String department) {
         super(id, name, department, "Anesthesiologist", "Anesthesiologist", true);
     }
 }
@@ -155,7 +155,7 @@ class Surgeon extends Doctor {
     }
     
     // MODIFIED: This now passes the correct role
-    public Surgeon(int id, String name, String department) {
+    public Surgeon(String id, String name, String department) {
         super(id, name, department, "Surgeon", "Surgeon", true);
     }
 }

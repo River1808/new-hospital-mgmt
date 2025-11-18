@@ -31,12 +31,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public abstract class Employee implements WorkSchedule {
 
     @Id
-    private int id;
+    private String id;
     private String name;
     private String department;
     private String role;
 
-    public Employee(int id, String name, String department, String role) {
+    public Employee(String id, String name, String department, String role) {
         this.id = id;
         this.name = name;
         this.department = department;
@@ -47,11 +47,11 @@ public abstract class Employee implements WorkSchedule {
     }
 
     // Getters and Setters
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

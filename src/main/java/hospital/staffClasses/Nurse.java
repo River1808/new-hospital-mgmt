@@ -9,7 +9,7 @@ public class Nurse extends Employee{
         super();
     }
     
-    public Nurse(int id, String name, String department, String dutyArea) {
+    public Nurse(String id, String name, String department, String dutyArea) {
         super(id, name, department, "Nurse"); // This "Nurses" role is correct
         this.dutyArea = dutyArea;
         this.onDuty = false; //default

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 function Employee() {
   const [employees, setEmployees] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -23,49 +24,87 @@ function Employee() {
         console.error('Error fetching employees:', err);
         setLoading(false);
       });
-  }, []); 
+  }, []);
 
-  const containerStyle = { padding: '2rem' };
-  const listStyle = { listStyleType: 'none', padding: 0 };
-  const listItemStyle = { border: '1px solid #ccc', padding: '10px', marginBottom: '5px', borderRadius: '5px' };
-  const buttonStyle = { marginBottom: '1rem', padding: '0.5rem 1rem', backgroundColor: '#28a745', color: 'white', textDecoration: 'none', border: 'none', borderRadius: '4px' };
+  // Filter
+  const filteredEmp = employees.filter((emp) => {
+    const term = searchTerm.toLowerCase();
+    return (
+      (emp.name || '').toLowerCase().includes(term) ||
+      (emp.role || '').toLowerCase().includes(term) ||
+      (emp.department || '').toLowerCase().includes(term)
+    );
+  });
 
-  if (loading) {
+  const containerStyle = { padding: '2rem', margin: '1rem', backgroundColor: 'white' };
+
+  if (loading) 
     return <div style={containerStyle}>Loading employees...</div>;
-  }
+  
 
-  if (error) {
+  if (error) 
     return <div style={containerStyle}>Error: {error}. Check the Java terminal.</div>;
-  }
+  
 
   return (
     <div style={containerStyle}>
-      <h2>Employee List</h2>
-      
-      <Link to="/employees/new">
-        <button style={buttonStyle}>Add New Employee</button>
-      </Link>
+      <h2>EMPLOYEE LIST</h2>
+
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem'}}>
+        <input 
+            type="text"
+            placeholder='Search Employee'
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            style={{padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc', width: '30%', outline: 'none'}}
+        />
+
+        <Link to="/employees/new">
+          <button style={{
+            padding: '0.5rem 1rem',
+            borderRadius: '4px',
+            border: 'none',
+            backgroundColor: '#06ad14ff',
+            color: '#fff',
+            cursor: 'pointer',
+            marginRight: '0.5rem'
+          }}
+          >Add Employee</button>
+        </Link>
+      </div>
+
 
       {employees.length === 0 ? (
         <p>No employees found. (The server is running, but the database list is empty or unreadable)</p>
       ) : (
-        <ul style={listStyle}>
-          {employees.map((employee, index) => (
-            
-            // --- 1. THIS IS THE FIX ---
-            // The key is now _id (from MongoTemplate)
-            <li key={employee._id || index} style={listItemStyle}>
-              
-              {/* --- 2. THIS IS THE FIX --- */}
-              {/* We must check for _id OR id */}
-              <strong>{employee.name} (ID: {employee.id || employee._id})</strong>
-              <br />
-              Role: {employee.role}
-              <br />
-              Department: {employee.department}
-            </li>
-          ))}
-        </ul>
+        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
+          <thead>
+            <tr style={{ backgroundColor: '#e6e6e6ff', textAlign: 'center' }}>
+              <th style={{ padding: '0.75rem', borderBottom: '1px solid #e5e7eb', width: '10%' }}>ID</th>
+              <th style={{ padding: '0.75rem', borderBottom: '1px solid #e5e7eb', width: '40%' }}>Name</th>
+              <th style={{ padding: '0.75rem', borderBottom: '1px solid #e5e7eb', width: '20%' }}>Role</th>
+              <th style={{ padding: '0.75rem', borderBottom: '1px solid #e5e7eb', width: '20%' }}>Department</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {filteredEmp.map((employee, index) => {
+              const key = employee._id || index; // unique key for React
+              const displayId = employee.id || (employee._id || employee._id.$oid) || String(employee._id); // show either id or _id
+
+              return (
+                <tr key={key} style={{ borderBottom: '1px solid #f3f4f6' }}>
+                  <td style={{ padding: '0.75rem', textAlign: 'center' }}>{displayId}</td>
+                  <td style={{ padding: '0.75rem' }}>
+                    <strong>{employee.name || 'Unknown'}</strong>
+                  </td>
+                  <td style={{ padding: '0.75rem' }}>{employee.role || '-'}</td>
+                  <td style={{ padding: '0.75rem' }}>{employee.department || '-'}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       )}
     </div>
   );
