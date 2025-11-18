@@ -47,18 +47,18 @@ function Employee() {
       </Link>
 
       {employees.length === 0 ? (
-        <p>No employees found. (The server is running, but the database list is empty or unreadable)</p>
+        <p>No employees found.</p>
       ) : (
         <ul style={listStyle}>
-          {employees.map((employee, index) => (
+          {employees.map((employee) => (
             
             // --- 1. THIS IS THE FIX ---
-            // The key is now _id (from MongoTemplate)
-            <li key={employee._id || index} style={listItemStyle}>
+            // The key is now the databaseId (the unique _id string)
+            <li key={employee.databaseId} style={listItemStyle}>
               
               {/* --- 2. THIS IS THE FIX --- */}
-              {/* We must check for _id OR id */}
-              <strong>{employee.name} (ID: {employee.id || employee._id})</strong>
+              {/* We display the user's "id" (the number) */}
+              <strong>{employee.name} (ID: {employee.id})</strong>
               <br />
               Role: {employee.role}
               <br />
