@@ -8,7 +8,7 @@ public class MaintenanceStaff extends Employee{
         super();
     }
     // Constructor
-    public MaintenanceStaff(String id, String name, String department, String dutyArea) {
+    public MaintenanceStaff(int id, String name, String department, String dutyArea) {
         super(id, name, department, "Maintenance Staff");
         this.dutyArea = dutyArea;
         this.onDuty = false;

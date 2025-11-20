@@ -21,16 +21,13 @@ function EmployeeForm() {
     event.preventDefault();
     setMessage(null);
 
-    // --- THIS IS THE FIX ---
-    // The JSON we send MUST match the Java class
     let newEmployee = {
-      id: parseInt(id, 10), // This satisfies the "id" rule
+      id: parseInt(id, 10),
       name: name,
       department: department,
-      role: role,             // This satisfies the "role" rule
-      _class: role            // This satisfies the Java "@JsonTypeInfo" rule
+      role: role,           
+      _class: role            
     };
-    // --- END OF FIX ---
 
     if (isDoctorRole) {
       newEmployee.emergencyCall = emergencyCall;

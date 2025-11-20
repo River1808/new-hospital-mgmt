@@ -6,19 +6,12 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "employee") 
-
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
     include = JsonTypeInfo.As.PROPERTY,
-    // --- THIS IS THE FIX ---
-    // We change this from "role" to "_class".
-    // This stops the conflict, and Spring will
-    // now save BOTH the "role" and "_class" fields.
     property = "_class" 
-    // --- END OF FIX ---
 )
 @JsonSubTypes({
-    // This map is 100% correct
     @JsonSubTypes.Type(value = Doctor.class, name = "Doctor"),
     @JsonSubTypes.Type(value = GP.class, name = "GP"),
     @JsonSubTypes.Type(value = Cardiologist.class, name = "Cardiologist"),
@@ -30,19 +23,21 @@ import org.springframework.data.mongodb.core.mapping.Document;
     @JsonSubTypes.Type(value = Nurse.class, name = "Nurse"),
     @JsonSubTypes.Type(value = MaintenanceStaff.class, name = "Maintenance Staff")
 })
-
 public abstract class Employee implements WorkSchedule {
 
-    // This is the MongoDB _id (e.g., "6915...")
+    // 1. The MongoDB ID (internal, hidden)
     @Id
-    private String id;
+    private String databaseId;
+
+    // 2. Your Employee ID (visible, number)
+    private int id;
+
     private String name;
     private String department;
-    
-    // This is the data field that the schema requires
     private String role;
 
-    public Employee(String id, String name, String department, String role) {
+    // Constructor takes 'int id'
+    public Employee(int id, String name, String department, String role) {
         this.id = id;
         this.name = name;
         this.department = department;
@@ -52,12 +47,21 @@ public abstract class Employee implements WorkSchedule {
     public Employee() {
     }
 
-    // Getters and Setters
-    public String getId() {
+    // --- Getters and Setters ---
+
+    public String getDatabaseId() {
+        return databaseId;
+    }
+
+    public void setDatabaseId(String databaseId) {
+        this.databaseId = databaseId;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -67,7 +71,7 @@ public abstract class Employee implements WorkSchedule {
     public void setDepartment(String department) { this.department = department; }
     public String getRole() { return role; }
     public void setRole(String role) { this.role = role; }
-    
+
     public final void displayEmployeeID() {
         System.out.println("Employee ID: " + id);
     }
