@@ -1,7 +1,9 @@
 package hospital.staffClasses;
 
-public class Doctor extends Employee {
-    private String specialtyArea;
+// Partial generic class
+public class Doctor<S> extends Employee {
+
+    private S specialtyArea;   // Generic
     private boolean onDuty;
     private boolean emergencyCall;
 
@@ -9,133 +11,118 @@ public class Doctor extends Employee {
         super();
     }
 
-    // MODIFIED: This constructor now accepts a 'role'
-    // This fixes the logic bug where all subclasses had the role "Doctor"
-    public Doctor(int id, String name, String department, String role, String specialtyArea, boolean emergencyCall) {
-        // This 'role' variable is passed up to Employee
-        super(id, name, department, role); 
-        this.specialtyArea = specialtyArea;
-        this.onDuty = false;
-        this.emergencyCall = emergencyCall;
-    }
-    
-    // This is a new constructor for creating a "generic" Doctor
-    public Doctor(int id, String name, String department, String specialtyArea, boolean emergencyCall) {
-        // This constructor hard-codes the role as "Doctor"
-        super(id, name, department, "Doctor"); 
+    public Doctor(int id, String name, String department, String role,
+                  S specialtyArea, boolean emergencyCall) {
+
+        super(id, name, department, role);
         this.specialtyArea = specialtyArea;
         this.onDuty = false;
         this.emergencyCall = emergencyCall;
     }
 
-    // (All getters/setters are fine)
-    public String getSpecialtyArea() { return specialtyArea; }
-    public void setSpecialtyArea(String specialtyArea) { this.specialtyArea = specialtyArea; }
+    // Generic getter/setter
+    public S getSpecialtyArea() { return specialtyArea; }
+    public void setSpecialtyArea(S specialtyArea) { this.specialtyArea = specialtyArea; }
+
     public boolean isOnDuty() { return onDuty; }
     public void setOnDuty(boolean onDuty) { this.onDuty = onDuty; }
+
     public boolean isEmergencyCall() { return emergencyCall; }
     public void setEmergencyCall(boolean emergencyCall) { this.emergencyCall = emergencyCall; }
 
     @Override
-    public String getDetails() { /* (no change) */
+    public String getDetails() {
         return "Doctor: " + getName() +
                 " Department: " + getDepartment() +
                 " Specialty: " + specialtyArea +
                 " On Duty: " + (onDuty ? "Yes" : "No") +
                 " Emergency Call: " + (emergencyCall ? "Available" : "Not Available");
     }
+
     @Override
-    public String getWorkingDays() { /* (no change) */
+    public String getWorkingDays() {
         return "Doctors typically work 5 days per week with rotating on-call duties.";
     }
-    public void markOnDuty(boolean duty) { /* (no change) */
+
+    public void markOnDuty(boolean duty) {
         this.onDuty = duty;
         System.out.println(getName() + (duty ? " is on duty." : " is off duty."));
     }
 }
 
-// --- All Subclasses must also be updated ---
+class GP extends Doctor<String> {
 
-class GP extends Doctor {
-    // ADDED: No-arg constructor
     public GP() {
         super();
     }
 
-    // MODIFIED: This now passes the correct role ("General Practitioner") to the new constructor
     public GP(int id, String name, String department) {
-        super(id, name, department, "GP", "GP", false);
+        super(id, name, department, "GP", "General Practice", false);
     }
 }
 
-class Cardiologist extends Doctor {
-    // ADDED: No-arg constructor
+class Cardiologist extends Doctor<String> {
+
     public Cardiologist() {
         super();
     }
-    
-    // MODIFIED: This now passes the correct role
+
     public Cardiologist(int id, String name, String department) {
-        super(id, name, department, "Cardiologist", "Cardiologist", false);
+        super(id, name, department, "Cardiologist", "Cardiology", false);
     }
 }
 
-class Psychiatrist extends Doctor {
-    // ADDED: No-arg constructor
+class Psychiatrist extends Doctor<String> {
+
     public Psychiatrist() {
         super();
     }
-    
-    // MODIFIED: This now passes the correct role
+
     public Psychiatrist(int id, String name, String department) {
-        super(id, name, department, "Psychiatrist", "Psychiatrist", true);
+        super(id, name, department, "Psychiatrist", "Psychiatry", true);
     }
 }
 
-class Radiologist extends Doctor {
-    // ADDED: No-arg constructor
+class Radiologist extends Doctor<String> {
+
     public Radiologist() {
         super();
     }
-    
-    // MODIFIED: This now passes the correct role
+
     public Radiologist(int id, String name, String department) {
-        super(id, name, department, "Radiologist", "Radiologist", false);
+        super(id, name, department, "Radiologist", "Radiology", false);
     }
 }
 
-class Neurologist extends Doctor {
-    // ADDED: No-arg constructor
+class Neurologist extends Doctor<String> {
+
     public Neurologist() {
         super();
     }
-    
-    // MODIFIED: This now passes the correct role
+
     public Neurologist(int id, String name, String department) {
-        super(id, name, department, "Neurologist", "Neurologist", true);
+        super(id, name, department, "Neurologist", "Neurology", true);
     }
 }
 
-class Anesthesiologist extends Doctor {
-    // ADDED: No-arg constructor
+class Anesthesiologist extends Doctor<String> {
+
     public Anesthesiologist() {
         super();
     }
-    
-    // MODIFIED: This now passes the correct role
+
     public Anesthesiologist(int id, String name, String department) {
-        super(id, name, department, "Anesthesiologist", "Anesthesiologist", true);
+        super(id, name, department, "Anesthesiologist", "Anesthesiology", true);
     }
 }
 
-class Surgeon extends Doctor {
-    // ADDED: No-arg constructor
+class Surgeon extends Doctor<String> {
+
     public Surgeon() {
         super();
     }
-    
-    // MODIFIED: This now passes the correct role
+
     public Surgeon(int id, String name, String department) {
-        super(id, name, department, "Surgeon", "Surgeon", true);
+        super(id, name, department, "Surgeon", "Surgery", true);
     }
 }
