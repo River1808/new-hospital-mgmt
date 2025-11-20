@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-// --- 1. THIS FUNCTION IS NOW SMARTER ---
+// --- 1. HELPER FUNCTION ---
 const formatDate = (dateValue) => {
   if (!dateValue) return 'N/A';
 
   try {
     // Create a new Date object from the database string
-    // (e.g., "2025-12-21T00:00:00.000Z")
     const date = new Date(dateValue);
     
     // Get the parts
@@ -78,70 +77,112 @@ function AllShifts() {
     }
   };
   
-  // Styling (no changes)
-  const containerStyle = { fontFamily: 'Arial, sans-serif', margin: '2rem auto', padding: '2rem', maxWidth: '900px', backgroundColor: '#f9f9f9', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.05)' };
+  // --- STYLES ---
+
+  // 1. New Page Wrapper with background1.jpg
+  const pageWrapperStyle = {
+    minHeight: '100vh',
+    width: '100%',
+    // Using background1.jpg as requested
+    backgroundImage: `url('/background1.jpg')`, 
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundAttachment: 'fixed',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    paddingTop: '3rem',
+    paddingBottom: '3rem'
+  };
+
+  // 2. Updated Container Style for Glassmorphism effect
+  const containerStyle = { 
+    fontFamily: 'Arial, sans-serif', 
+    width: '95%',
+    maxWidth: '1000px', 
+    // Slight transparency
+    backgroundColor: 'rgba(249, 249, 249, 0.95)', 
+    borderRadius: '12px', 
+    boxShadow: '0 8px 32px rgba(0,0,0,0.15)', 
+    padding: '2rem',
+    backdropFilter: 'blur(5px)'
+  };
+
   const tableStyle = { width: '100%', borderCollapse: 'collapse', marginTop: '1.5rem' };
   const thStyle = { backgroundColor: '#007bff', color: 'white', padding: '0.75rem', border: '1px solid #ddd', textAlign: 'center' };
-  const tdStyle = { padding: '0.75rem', border: '1px solid #ddd', backgroundColor: '#fff' };
+  // Made cells slightly transparent to match theme
+  const tdStyle = { padding: '0.75rem', border: '1px solid #ddd', backgroundColor: 'rgba(255, 255, 255, 0.8)' };
+  
   const buttonStyle = { padding: '0.5rem 1rem', border: 'none', borderRadius: '4px', backgroundColor: '#28a745', color: 'white', fontSize: '1rem', cursor: 'pointer', textDecoration: 'none' };
-  const headerStyle = { display: 'flex', justifyContent: 'space-between', alignItems: 'center' };
+  const headerStyle = { display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid #eee', paddingBottom: '1rem', marginBottom: '1rem' };
   const deleteButtonStyle = { padding: '0.3rem 0.6rem', border: 'none', borderRadius: '4px', backgroundColor: '#dc3545', color: 'white', fontSize: '0.9rem', cursor: 'pointer' };
   
   if (loading) {
-    return <div style={containerStyle}><h2>Loading All Shifts...</h2></div>;
+    return (
+      <div style={pageWrapperStyle}>
+        <div style={containerStyle}>
+          <h2 style={{textAlign: 'center', color: '#555'}}>Loading All Shifts...</h2>
+        </div>
+      </div>
+    );
   }
   
   return (
-    <div style={containerStyle}>
-      <div style={headerStyle}>
-        <h2>SHIFTS</h2>
-        <Link to="/shifts/new" style={buttonStyle}>
-          Add New Shift
-        </Link>
-      </div>
-      
-      {error && <p style={{ color: 'red' }}>Error: {error}</p>}
+    <div style={pageWrapperStyle}>
+      <div style={containerStyle}>
+        <div style={headerStyle}>
+          <h2 style={{margin: 0}}>SHIFTS</h2>
+          <Link to="/shifts/new" style={buttonStyle}>
+            Add New Shift
+          </Link>
+        </div>
+        
+        {error && (
+          <div style={{ padding: '10px', backgroundColor: '#ffebee', color: '#c62828', borderRadius: '4px', marginBottom: '1rem' }}>
+            Error: {error}
+          </div>
+        )}
 
-      {shifts.length === 0 ? (
-        <p>No shifts found in the database.</p>
-      ) : (
-        <table style={tableStyle}>
-          <thead>
-            <tr>
-              <th style={thStyle}>Employee ID</th>
-              <th style={thStyle}>Role</th>
-              <th style={thStyle}>Date (DD-MM-YYYY)</th>
-              <th style={thStyle}>Start Time</th>
-              <th style={thStyle}>End Time</th>
-              <th style={thStyle}>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {shifts.map((shift) => (
-              // --- 1. THE FIX ---
-              // The key is now just shift.id
-              <tr key={shift.id}>
-                <td style={tdStyle}>{shift.employeeId}</td>
-                <td style={tdStyle}>{shift.role}</td>
-                <td style={tdStyle}>{formatDate(shift.date)}</td>
-                <td style={tdStyle}>{shift.startTime}</td>
-                <td style={tdStyle}>{shift.endTime}</td>
-                
-                <td style={tdStyle}>
-                  <button 
-                    style={deleteButtonStyle} 
-                    // --- 2. THE FIX ---
-                    // We just pass shift.id directly
-                    onClick={() => handleDelete(shift.id)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+        {shifts.length === 0 ? (
+          <p>No shifts found in the database.</p>
+        ) : (
+          <div style={{ overflowX: 'auto' }}>
+            <table style={tableStyle}>
+              <thead>
+                <tr>
+                  <th style={thStyle}>Employee ID</th>
+                  <th style={thStyle}>Role</th>
+                  <th style={thStyle}>Date (DD-MM-YYYY)</th>
+                  <th style={thStyle}>Start Time</th>
+                  <th style={thStyle}>End Time</th>
+                  <th style={thStyle}>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {shifts.map((shift) => (
+                  <tr key={shift.id}>
+                    <td style={tdStyle}>{shift.employeeId}</td>
+                    <td style={tdStyle}>{shift.role}</td>
+                    <td style={tdStyle}>{formatDate(shift.date)}</td>
+                    <td style={tdStyle}>{shift.startTime}</td>
+                    <td style={tdStyle}>{shift.endTime}</td>
+                    
+                    <td style={tdStyle}>
+                      <button 
+                        style={deleteButtonStyle} 
+                        onClick={() => handleDelete(shift.id)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
