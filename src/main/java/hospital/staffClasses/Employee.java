@@ -2,10 +2,7 @@ package hospital.staffClasses;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "employee")
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
     include = JsonTypeInfo.As.PROPERTY,
@@ -25,15 +22,17 @@ import org.springframework.data.mongodb.core.mapping.Document;
 })
 public abstract class Employee implements WorkSchedule {
 
-    @Id
+    // 1. Technical Key (MongoDB _id)
     private String databaseId;
 
+    // 2. Business Key (Must be INT to match your DB Validation)
     private int id;
 
     private String name;
     private String department;
     private String role;
 
+    // Constructor uses INT id
     public Employee(int id, String name, String department, String role) {
         this.id = id;
         this.name = name;

@@ -9,18 +9,33 @@ function Employee() {
 
   const [selectedEmployee, setSelectedEmployee] = useState(null);
 
-  // --- FETCH EMPLOYEES ---
+  // --- FETCH EMPLOYEES (WITH DEBUGGING) ---
   const fetchEmployees = () => {
+    console.log("--- FRONTEND DEBUG: Attempting to fetch employees... ---");
+    
     fetch('http://localhost:8080/api/employees')
-      .then(response => {
-        if (!response.ok) throw new Error('Failed to fetch.');
+      .then(async response => {
+        console.log("--- FRONTEND DEBUG: Response Received ---");
+        console.log("Status Code:", response.status);
+        console.log("Status Text:", response.statusText);
+
+        if (!response.ok) {
+          // Try to read the error text from the Java server
+          const errorText = await response.text();
+          console.error("Server Error Message:", errorText);
+          throw new Error(`Server responded with ${response.status}: ${errorText}`);
+        }
         return response.json();
       })
       .then(data => {
+        console.log("--- FRONTEND DEBUG: JSON Data Parsed Successfully ---");
+        console.log("Data received:", data);
         setEmployees(data);
         setLoading(false);
       })
       .catch(err => {
+        console.error("--- FRONTEND DEBUG: Fetch Failed Completely ---");
+        console.error("Error Details:", err);
         setError(err.message);
         setLoading(false);
       });
@@ -35,17 +50,25 @@ function Employee() {
     e.stopPropagation(); 
     if(!window.confirm(`Are you sure you want to delete Employee #${id}?`)) return;
 
+    console.log(`--- FRONTEND DEBUG: Deleting ID ${id} ---`);
+
     try {
       const response = await fetch(`http://localhost:8080/api/employees/${id}`, {
         method: 'DELETE',
       });
+      
+      console.log("Delete response status:", response.status);
+
       if (response.ok) {
+        console.log("Delete successful, refreshing list...");
         fetchEmployees();
       } else {
-        alert("Failed to delete. Check console.");
+        const errText = await response.text();
+        console.error("Delete failed:", errText);
+        alert(`Failed to delete. Server said: ${errText}`);
       }
     } catch (error) {
-      console.error("Delete error:", error);
+      console.error("Delete network error:", error);
     }
   };
 
@@ -80,8 +103,8 @@ function Employee() {
     maxWidth: '500px', width: '90%', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', position: 'relative'
   };
 
-  if (loading) return <div style={containerStyle}>Loading employees...</div>;
-  if (error) return <div style={containerStyle}>Error: {error}</div>;
+  if (loading) return <div style={containerStyle}>Loading employees... (Check Console F12 for Debug Logs)</div>;
+  if (error) return <div style={containerStyle}><h3 style={{color:'red'}}>Connection Error</h3><p>{error}</p><p>Please check the Console (F12) and your Java Terminal.</p></div>;
 
   return (
     <div style={containerStyle}>
@@ -113,8 +136,9 @@ function Employee() {
           </thead>
 
           <tbody>
-            {filteredEmp.map((employee, index) => {
-              const key = employee.databaseId || index; 
+            {filteredEmp.map((employee) => {
+              // Use 'id' as the key since we're using integer IDs now
+              const key = employee.id; 
               return (
                 <tr 
                   key={key} 
@@ -147,7 +171,7 @@ function Employee() {
               <strong>Role:</strong> {selectedEmployee.role}
             </div>
 
-            {/* --- NEW: DISPLAYING THE FINAL METHOD CALCULATION --- */}
+            {/* --- DISPLAYING THE FINAL METHOD CALCULATION --- */}
             <div style={{marginBottom:'15px', backgroundColor:'#e3f2fd', padding:'10px', borderRadius:'6px', borderLeft:'4px solid #007bff'}}>
               <strong style={{color:'#007bff'}}>Official Email:</strong><br/>
               <span style={{fontFamily:'monospace', fontSize:'1.1em'}}>
@@ -158,14 +182,14 @@ function Employee() {
             <div style={{backgroundColor: '#f8f9fa', padding: '1rem', borderRadius: '8px', marginBottom: '1rem', borderLeft: '4px solid #28a745'}}>
                <h4 style={{margin:'0 0 5px 0', color: '#28a745'}}>Details</h4>
                <p style={{margin:0}}>
-                 {selectedEmployee.details ? selectedEmployee.details : <em style={{color:'#999'}}>Data unavailable (Please re-add this employee)</em>}
+                 {selectedEmployee.details ? selectedEmployee.details : <em style={{color:'#999'}}>Data unavailable</em>}
                </p>
             </div>
 
             <div style={{backgroundColor: '#fff3cd', padding: '1rem', borderRadius: '8px', marginBottom: '1rem', borderLeft: '4px solid #ffc107'}}>
                <h4 style={{margin:'0 0 5px 0', color: '#856404'}}>Working Schedule</h4>
                <p style={{margin:0}}>
-                 {selectedEmployee.workingDays ? selectedEmployee.workingDays : <em style={{color:'#999'}}>Data unavailable (Please re-add this employee)</em>}
+                 {selectedEmployee.workingDays ? selectedEmployee.workingDays : <em style={{color:'#999'}}>Data unavailable</em>}
                </p>
             </div>
 
