@@ -250,10 +250,7 @@ public class Main {
                 .append("department", emp.getDepartment())
                 .append("role", emp.getRole());
     }
-
-    // =====================================================
-    // SHIFT MAPPERS
-    // =====================================================
+    //Shift mappers
 
     private static Shift safeMapShift(Document doc) {
         try {
@@ -278,10 +275,7 @@ public class Main {
                 .append("endTime", s.getEndTime())
                 .append("role", s.getRole());
     }
-
-    // =====================================================
-    // LEAVE REQUEST MAPPERS
-    // =====================================================
+    //leave request mappers 
 
     private static LeaveRequest safeMapLeave(Document doc) {
         try {

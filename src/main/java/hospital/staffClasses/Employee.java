@@ -22,17 +22,14 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 })
 public abstract class Employee implements WorkSchedule {
 
-    // 1. Technical Key (MongoDB _id)
     private String databaseId;
 
-    // 2. Business Key (Must be INT to match your DB Validation)
     private int id;
 
     private String name;
     private String department;
     private String role;
 
-    // Constructor uses INT id
     public Employee(int id, String name, String department, String role) {
         this.id = id;
         this.name = name;

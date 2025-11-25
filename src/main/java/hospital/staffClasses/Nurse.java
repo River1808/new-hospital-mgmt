@@ -4,17 +4,17 @@ public class Nurse extends Employee {
 
     private String dutyArea;
 
-    // 1. Empty constructor for JSON (Jackson)
+    // Empty constructor for JSON 
     public Nurse() {
         super();
     }
 
-    // 2. Constructor required by Main.java (matches Employee super constructor)
+    // Constructor required by Main.java 
     public Nurse(int id, String name, String department, String role) {
         super(id, name, department, role);
     }
 
-    // 3. Specific constructor (if you want to use specific fields)
+    // Specific constructor 
     public Nurse(int id, String name, String department, String role, String dutyArea) {
         super(id, name, department, role);
         this.dutyArea = dutyArea;

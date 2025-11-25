@@ -5,7 +5,6 @@ import java.util.Date;
 
 public class LeaveRequest {
 
-    // Changed from String to int to match your new ID logic
     private String id;
 
     private int employeeId;
@@ -31,7 +30,6 @@ public class LeaveRequest {
         this.reason = reason;
     }
 
-    // Constructor without ID (for creating new requests before saving)
     public LeaveRequest(int employeeId, Date startDate, Date endDate, String status, String reason) {
         this.employeeId = employeeId;
         this.startDate = startDate;

@@ -43,16 +43,12 @@ public class Doctor<S> extends Employee {
     }
 }
 
-// --- Subclasses (Package-Private) ---
 
 class GP extends Doctor<String> {
 
     public GP() {
         super();
     }
-
-    // Matches the 4-arg constructor called by Main.java logic if needed, 
-    // or strictly uses the specific one below.
     public GP(int id, String name, String department, String role) {
         super(id, name, department, role, "General Practice", false);
     }

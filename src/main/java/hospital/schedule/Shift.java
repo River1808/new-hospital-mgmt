@@ -5,7 +5,6 @@ import java.util.Date;
 
 public class Shift {
 
-    // Changed from String to int to match your new ID logic
     private String id;
 
     private int employeeId;
@@ -29,7 +28,6 @@ public class Shift {
         this.role = role;
     }
 
-    // Constructor without ID (for creating new shifts before saving)
     public Shift(int employeeId, Date date, String startTime, String endTime, String role) {
         this.employeeId = employeeId;
         this.date = date;

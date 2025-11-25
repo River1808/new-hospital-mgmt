@@ -4,17 +4,14 @@ public class MaintenanceStaff extends Employee {
 
     private String dutyArea;
 
-    // 1. Empty constructor for JSON (Jackson)
     public MaintenanceStaff() {
         super();
     }
 
-    // 2. Constructor required by Main.java logic (matches Employee super constructor)
     public MaintenanceStaff(int id, String name, String department, String role) {
         super(id, name, department, role);
     }
 
-    // 3. Specific constructor (if you want to use specific fields)
     public MaintenanceStaff(int id, String name, String department, String role, String dutyArea) {
         super(id, name, department, role);
         this.dutyArea = dutyArea;
