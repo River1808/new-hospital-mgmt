@@ -2,7 +2,6 @@ package hospital.staffClasses;
 
 public class Nurse extends Employee {
 
-    private String dutyArea;
 
     // Empty constructor for JSON 
     public Nurse() {
@@ -14,14 +13,11 @@ public class Nurse extends Employee {
         super(id, name, department, role);
     }
 
-    public String getDutyArea() { return dutyArea; }
-    public void setDutyArea(String dutyArea) { this.dutyArea = dutyArea; }
 
     @Override
     public String getDetails() {
         return "Nurse: " + getName()
-                + ", Department: " + getDepartment()
-                + (dutyArea != null ? ", Duty Area: " + dutyArea : "");
+                + ", Department: " + getDepartment();
     }
 
     @Override
