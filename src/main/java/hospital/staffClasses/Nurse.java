@@ -14,12 +14,6 @@ public class Nurse extends Employee {
         super(id, name, department, role);
     }
 
-    // Specific constructor 
-    public Nurse(int id, String name, String department, String role, String dutyArea) {
-        super(id, name, department, role);
-        this.dutyArea = dutyArea;
-    }
-
     public String getDutyArea() { return dutyArea; }
     public void setDutyArea(String dutyArea) { this.dutyArea = dutyArea; }
 
