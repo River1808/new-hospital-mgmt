@@ -1,3 +1,4 @@
+//This file is just for testing connection with the Database
 package hospital.database;
 
 import com.mongodb.client.MongoClient;
@@ -14,16 +15,14 @@ public class databaseConnection {
     public static void main(String[] args) {
         System.out.println(">>> [TEST] Starting Database Connection Test...");
 
-        String connectionString = "mongodb://localhost:27017"; // Default
+        String connectionString = "mongodb://localhost:27017";
 
         try {
-            // 1. Load .env
             Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
             String dbHost = dotenv.get("DB_HOST");
             
             if (dbHost != null && !dbHost.isEmpty()) {
                 System.out.println(">>> [TEST] Found DB_HOST: " + dbHost);
-                // Fix logic: Add prefix if missing
                 if (dbHost.startsWith("mongodb")) {
                     connectionString = dbHost;
                 } else {
@@ -35,7 +34,6 @@ public class databaseConnection {
 
             System.out.println(">>> [TEST] Final Connection String: " + connectionString);
 
-            // 2. Attempt Connection
             try (MongoClient mongoClient = MongoClients.create(connectionString)) {
                 
                 MongoDatabase database = mongoClient.getDatabase("hospital");
@@ -45,7 +43,6 @@ public class databaseConnection {
                 long count = employees.countDocuments();
                 System.out.println(">>> [TEST] Found " + count + " documents in 'employee' collection.");
 
-                // 3. Print First 5 Documents
                 List<Document> results = employees.find().limit(5).into(new ArrayList<>());
                 for (Document doc : results) {
                     System.out.println("    - " + doc.toJson());
