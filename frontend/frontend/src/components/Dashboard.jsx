@@ -103,7 +103,7 @@ export default function Dashboard() {
     fontSize: '16px',
     fontWeight: '600',
     color: 'white',
-    backgroundColor: '#007bff',
+    backgroundColor: '#254126',
     border: 'none',
     borderRadius: '5px',
     textDecoration: 'none',
@@ -113,12 +113,12 @@ export default function Dashboard() {
   
   const buttonStyleTertiary = {
     ...buttonStyle,
-    backgroundColor: '#28a745'
+    backgroundColor: '#325833'
   };
 
   const buttonStyleWarning = {
     ...buttonStyle,
-    backgroundColor: '#ffc107'
+    backgroundColor: '#427644'
   };
 
 
@@ -128,7 +128,7 @@ export default function Dashboard() {
       <Snowflakes />
 
       <div style={contentStyle}>
-        <h1 style={{ color: '#333', marginTop: 0 }}>Hospital Schedule Management</h1>
+        <h1 style={{ color: '#333', marginTop: '0'}}>Hospital Schedule Management</h1>
         <p style={{ color: '#555', fontSize: '1.1rem' }}>Choose an option:</p>
         
         <div>

@@ -88,15 +88,14 @@ function AllShifts() {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'flex-start',
-    paddingTop: '3rem',
-    paddingBottom: '3rem'
+    paddingTop: '2rem',
+    paddingBottom: '2rem'
   };
 
   const containerStyle = { 
-    fontFamily: 'Arial, sans-serif', 
-    width: '95%',
+    width: '100%',
     maxWidth: '1000px', 
-    backgroundColor: 'rgba(249, 249, 249, 0.95)', 
+    backgroundColor: 'white',
     borderRadius: '12px', 
     boxShadow: '0 8px 32px rgba(0,0,0,0.15)', 
     padding: '2rem',
@@ -104,11 +103,11 @@ function AllShifts() {
   };
 
   const tableStyle = { width: '100%', borderCollapse: 'collapse', marginTop: '1.5rem' };
-  const thStyle = { backgroundColor: '#007bff', color: 'white', padding: '0.75rem', border: '1px solid #ddd', textAlign: 'center' };
-  const tdStyle = { padding: '0.75rem', border: '1px solid #ddd', backgroundColor: 'rgba(255, 255, 255, 0.8)' };
+  const thStyle = { color: '#325833', padding: '0.75rem', textAlign: 'center', borderBottom: '1px solid #ddd' };
+  const tdStyle = { padding: '0.75rem', borderBottom: '1px solid #f3f4f6', textAlign: 'center' };
   
   const buttonStyle = { padding: '0.5rem 1rem', border: 'none', borderRadius: '4px', backgroundColor: '#28a745', color: 'white', fontSize: '1rem', cursor: 'pointer', textDecoration: 'none' };
-  const headerStyle = { display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid #eee', paddingBottom: '1rem', marginBottom: '1rem' };
+  const headerStyle = { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', marginTop: '1rem' };
   const deleteButtonStyle = { padding: '0.3rem 0.6rem', border: 'none', borderRadius: '4px', backgroundColor: '#dc3545', color: 'white', fontSize: '0.9rem', cursor: 'pointer' };
   
   if (loading) {
@@ -125,7 +124,7 @@ function AllShifts() {
     <div style={pageWrapperStyle}>
       <div style={containerStyle}>
         <div style={headerStyle}>
-          <h2 style={{margin: 0}}>SHIFTS</h2>
+          <h2 style={{margin: 0, color: '#244227'}}>SHIFTS</h2>
           <Link to="/shifts/new" style={buttonStyle}>
             Add New Shift
           </Link>
@@ -144,12 +143,12 @@ function AllShifts() {
             <table style={tableStyle}>
               <thead>
                 <tr>
-                  <th style={thStyle}>Employee ID</th>
-                  <th style={thStyle}>Role</th>
-                  <th style={thStyle}>Date (DD-MM-YYYY)</th>
-                  <th style={thStyle}>Start Time</th>
-                  <th style={thStyle}>End Time</th>
-                  <th style={thStyle}>Actions</th>
+                  <th style={thStyle}>EMPLOYEE ID</th>
+                  <th style={thStyle}>ROLE</th>
+                  <th style={thStyle}>DATE</th>
+                  <th style={thStyle}>START TIME</th>
+                  <th style={thStyle}>END TIME</th>
+                  <th style={thStyle}>ACTIONS</th>
                 </tr>
               </thead>
               <tbody>

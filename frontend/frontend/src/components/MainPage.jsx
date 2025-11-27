@@ -143,12 +143,12 @@ export default function Dashboard() {
 
     const buttonStyleTertiary = {
         ...buttonStyle,
-        backgroundColor: '#28a745'
+        backgroundColor: '#1D351F'
     };
 
     const buttonStyleWarning = {
         ...buttonStyle,
-        backgroundColor: '#ffc107'
+        backgroundColor: '#325833'
     };
 
     return (

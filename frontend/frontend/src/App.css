@@ -8,5 +8,5 @@ body, #root, .App {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(238, 238, 238);
+  background-color: #EED6BE;
 }

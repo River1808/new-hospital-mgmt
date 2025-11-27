@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// --- 1. Animation Components ---
+//  Animation Components 
 const AnimationStyles = () => (
     <style>
         {`
@@ -89,9 +89,9 @@ function LogIn({ onLogin }) {
     };
 
     const divStyle = { marginBottom: '1rem', display: 'flex', flexDirection: 'column' };
-    const labelStyle = { fontWeight: '600', marginBottom: '0.5rem' };
+    const labelStyle = { fontWeight: '600', marginBottom: '0.5rem', color: '#325833' };
     const inputStyle = { padding: '0.75rem', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1rem' };
-    const buttonStyle = { padding: '0.75rem 1.5rem', border: 'none', borderRadius: '4px', backgroundColor: '#007bff', color: 'white', fontSize: '1rem', cursor: 'pointer' };
+    const buttonStyle = { padding: '0.75rem 1.5rem', border: 'none', borderRadius: '4px', backgroundColor: '#325833', color: 'white', fontSize: '1rem', cursor: 'pointer' };
     const backgroundImageUrl = '/background1.jpg';
 
     return (
@@ -110,7 +110,7 @@ function LogIn({ onLogin }) {
             <Snowflakes />
 
             <form onSubmit={handleSubmit} style={formStyle}>
-                <h2 style={{textAlign: 'center'}}>Admin Login</h2>
+                <h2 style={{textAlign: 'center', color: '#1D351F'}}>Admin Login</h2>
 
                 {error && <p style={{ color: 'red' }}>{error}</p>}
 
