@@ -1,22 +1,25 @@
 package hospital.mapper;
 
 import hospital.schedule.LeaveRequest;
+import hospital.database.documents.LeaveRequestDocument;
 import org.bson.Document;
 
 public class LeaveMapper {
 
-    public static LeaveRequest fromDoc(Document doc) {
-        return new LeaveRequest(
-                doc.getObjectId("_id").toString(),
-                doc.getInteger("employeeId"),
-                doc.getDate("startDate"),
-                doc.getDate("endDate"),
-                doc.getString("status"),
-                doc.getString("reason")
-        );
+    // MongoDB Document → LeaveRequestDocument
+    public static LeaveRequestDocument toDocumentModel(Document doc) {
+        LeaveRequestDocument d = new LeaveRequestDocument();
+        d.setId(doc.getObjectId("_id").toHexString());
+        d.setEmployeeId(doc.getInteger("employeeId"));
+        d.setStartDate(doc.getDate("startDate"));
+        d.setEndDate(doc.getDate("endDate"));
+        d.setStatus(doc.getString("status"));
+        d.setReason(doc.getString("reason"));
+        return d;
     }
 
-    public static Document toDoc(LeaveRequest r) {
+    // Domain → MongoDB Document
+    public static Document toDbDocument(LeaveRequest r) {
         return new Document()
                 .append("employeeId", r.getEmployeeId())
                 .append("startDate", r.getStartDate())

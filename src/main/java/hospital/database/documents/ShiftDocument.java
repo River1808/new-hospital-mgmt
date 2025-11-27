@@ -1,28 +1,21 @@
-package hospital.schedule;
+package hospital.database.documents;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
-public class Shift {
+public class ShiftDocument {
 
+    private String id;       
     private int employeeId;
-    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date date;
-    
     private String startTime;
     private String endTime;
     private String role;
 
-    public Shift() {
-    }
+    public ShiftDocument() {}
 
-    public Shift(int employeeId, Date date, String startTime, String endTime, String role) {
-        this.employeeId = employeeId;
-        this.date = date;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.role = role;
-    }
+    // Getters & Setters
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
 
     public int getEmployeeId() { return employeeId; }
     public void setEmployeeId(int employeeId) { this.employeeId = employeeId; }

@@ -2,6 +2,7 @@ package hospital.repository;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
+import hospital.database.documents.LeaveRequestDocument;
 import hospital.mapper.LeaveMapper;
 import hospital.schedule.LeaveRequest;
 import org.bson.Document;
@@ -18,20 +19,23 @@ public class LeaveRepo {
         this.col = col;
     }
 
-    public List<LeaveRequest> findAll() {
-        List<LeaveRequest> list = new ArrayList<>();
+    // Return list of DB-level documents
+    public List<LeaveRequestDocument> findAll() {
+        List<LeaveRequestDocument> list = new ArrayList<>();
         for (Document doc : col.find()) {
-            list.add(LeaveMapper.fromDoc(doc));
+            list.add(LeaveMapper.toDocumentModel(doc));
         }
         return list;
     }
 
-    public void save(LeaveRequest r) {
-        Document doc = LeaveMapper.toDoc(r);
+    // Save domain object → return database id
+    public String save(LeaveRequest r) {
+        Document doc = LeaveMapper.toDbDocument(r);
         col.insertOne(doc);
-        r.setId(doc.getObjectId("_id").toString());
+        return doc.getObjectId("_id").toHexString();
     }
 
+    // Change status using MongoDB id
     public void updateStatus(String id, String status) {
         col.updateOne(
                 Filters.eq("_id", new ObjectId(id)),

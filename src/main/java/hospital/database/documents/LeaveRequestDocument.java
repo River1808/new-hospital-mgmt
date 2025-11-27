@@ -1,31 +1,20 @@
-package hospital.schedule;
+package hospital.database.documents;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
-public class LeaveRequest {
+public class LeaveRequestDocument {
 
+    private String id;   
     private int employeeId;
-
-    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
-
-    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
-
     private String status;
     private String reason;
 
-    public LeaveRequest() {
-    }
+    public LeaveRequestDocument() {}
 
-    public LeaveRequest(int employeeId, Date startDate, Date endDate, String status, String reason) {
-        this.employeeId = employeeId;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.status = status;
-        this.reason = reason;
-    }
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
 
     public int getEmployeeId() { return employeeId; }
     public void setEmployeeId(int employeeId) { this.employeeId = employeeId; }

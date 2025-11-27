@@ -1,37 +1,35 @@
 package hospital.mapper;
 
+import hospital.database.documents.EmployeeDocument;
 import hospital.staffClasses.*;
-import org.bson.Document;
 
 public class EmployeeMapper {
 
-    public static Employee fromDoc(Document doc) {
-        try {
-            int id = doc.getInteger("id");
-            String name = doc.getString("name");
-            String dept = doc.getString("department");
-            String role = doc.getString("role");
+    // Convert DB document → Domain object
+    public static Employee toDomain(EmployeeDocument doc) {
+        Employee e;
 
-            Employee e;
-            switch (role) {
-                case "Nurse": e = new Nurse(id, name, dept, role); break;
-                case "Maintenance Staff": e = new MaintenanceStaff(id, name, dept, role); break;
-                default: e = new Doctor(id, name, dept, role);
-            }
-
-            e.setDatabaseId(doc.getObjectId("_id").toString());
-            return e;
-
-        } catch (Exception ex) {
-            return null;
+        switch (doc.getRole()) {
+            case "Nurse":
+                e = new Nurse(doc.getId(), doc.getName(), doc.getDepartment(), doc.getRole());
+                break;
+            case "Maintenance Staff":
+                e = new MaintenanceStaff(doc.getId(), doc.getName(), doc.getDepartment(),doc.getRole());
+                break;
+            default:
+                e = new Doctor(doc.getId(), doc.getName(), doc.getDepartment(),doc.getRole());
         }
+
+        return e;
     }
 
-    public static Document toDoc(Employee e) {
-        return new Document()
-                .append("id", e.getId())
-                .append("name", e.getName())
-                .append("department", e.getDepartment())
-                .append("role", e.getRole());
+    // Convert Domain object → DB document
+    public static EmployeeDocument toDocument(Employee e) {
+        EmployeeDocument doc = new EmployeeDocument();
+        doc.setId(e.getId());
+        doc.setName(e.getName());
+        doc.setDepartment(e.getDepartment());
+        doc.setRole(e.getRole());
+        return doc;
     }
 }

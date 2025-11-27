@@ -1,6 +1,7 @@
 package hospital.service;
 
 import hospital.schedule.Shift;
+import hospital.database.documents.ShiftDocument;
 import hospital.repository.ShiftRepo;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public class ShiftService {
         this.repo = repo;
     }
 
-    public List<Shift> getAll() {
+    public List<ShiftDocument> getAll() {
         return repo.findAll();
     }
 
