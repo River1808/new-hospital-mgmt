@@ -143,12 +143,12 @@ export default function Dashboard() {
 
     const buttonStyleTertiary = {
         ...buttonStyle,
-        backgroundColor: '#28a745'
+        backgroundColor: '#1D351F'
     };
 
     const buttonStyleWarning = {
         ...buttonStyle,
-        backgroundColor: '#ffc107'
+        backgroundColor: '#325833'
     };
 
     return (
@@ -160,7 +160,7 @@ export default function Dashboard() {
             <Presents />
 
             <div style={contentStyle}>
-                <h1 style={{ color: '#333', marginTop: 0 }}>Hospital Staff Portal</h1>
+                <h1 style={{ color: '#1d351f', marginTop: 0 }}>Hospital Staff Portal</h1>
                 <p style={{ color: '#555', fontSize: '1.1rem' }}>Choose an option:</p>
 
                 <div>

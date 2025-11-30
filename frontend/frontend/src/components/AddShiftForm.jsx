@@ -81,16 +81,16 @@ function AddShiftForm() {
     maxWidth: '500px', 
     boxShadow: '0 8px 32px rgba(0,0,0,0.1)', 
     borderRadius: '12px', 
-    backgroundColor: 'rgba(255, 255, 255, 0.95)', 
     width: '100%',
+    backgroundColor: 'white',
     backdropFilter: 'blur(5px)'
   };
 
   const divStyle = { marginBottom: '1rem', display: 'flex', flexDirection: 'column' };
-  const labelStyle = { fontWeight: '600', marginBottom: '0.5rem', color: '#333' };
+  const labelStyle = { fontWeight: '600', marginBottom: '0.5rem', color: '#325833' };
   const inputStyle = { padding: '0.75rem', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1rem', backgroundColor: '#fff' };
   const readOnlyInputStyle = { ...inputStyle, backgroundColor: '#f3f4f6', color: '#555', cursor: 'not-allowed' }; 
-  const buttonStyle = { padding: '0.75rem 1.5rem', border: 'none', borderRadius: '4px', backgroundColor: '#007bff', color: 'white', fontSize: '1rem', cursor: 'pointer', fontWeight: 'bold', marginTop: '1rem' };
+  const buttonStyle = { padding: '0.75rem 1.5rem', border: 'none', borderRadius: '4px', backgroundColor: '#325822', color: 'white', fontSize: '1rem', cursor: 'pointer', fontWeight: 'bold', marginTop: '1rem' };
 
   return (
     <div style={{
@@ -105,7 +105,7 @@ function AddShiftForm() {
       backgroundAttachment: 'fixed'
     }}>
       <form onSubmit={handleSubmit} style={formStyle}>
-        <h2 style={{ textAlign: 'center', marginBottom: '1.5rem', color: '#333' }}>Add New Shift</h2>
+        <h2 style={{ textAlign: 'center', marginBottom: '1.5rem', color: '#1d351f' }}>Add New Shift</h2>
 
         {message && (
           <div style={{ padding: '10px', backgroundColor: '#ffebee', color: '#c62828', borderRadius: '4px', marginBottom: '1rem' }}>

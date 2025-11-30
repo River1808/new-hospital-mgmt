@@ -76,7 +76,7 @@ function AllLeaveRequests() {
   const pageWrapperStyle = {
     minHeight: '100vh',
     width: '100%',
-    backgroundImage: `url('/background2.jpg')`, 
+    backgroundImage: `url('/background1.jpg')`, 
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
@@ -84,15 +84,14 @@ function AllLeaveRequests() {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'flex-start',
-    paddingTop: '3rem',
-    paddingBottom: '3rem'
+    paddingTop: '2rem',
+    paddingBottom: '2rem'
   };
 
   const containerStyle = { 
-    fontFamily: 'Arial, sans-serif', 
-    width: '95%',
+    width: '100%',
     maxWidth: '1000px', 
-    backgroundColor: 'rgba(249, 249, 249, 0.95)', 
+    backgroundColor: 'white', 
     borderRadius: '12px', 
     boxShadow: '0 8px 32px rgba(0,0,0,0.15)', 
     padding: '2rem',
@@ -100,8 +99,8 @@ function AllLeaveRequests() {
   };
 
   const tableStyle = { width: '100%', borderCollapse: 'collapse', marginTop: '1.5rem' };
-  const thStyle = { backgroundColor: '#007bff', color: 'white', padding: '0.75rem', border: '1px solid #ddd', textAlign: 'left' };
-  const tdStyle = { padding: '0.75rem', border: '1px solid #ddd', backgroundColor: 'rgba(255, 255, 255, 0.8)' };
+  const thStyle = { color: '#325833', padding: '0.75rem', textAlign: 'center', borderBottom: '1px solid #ddd' };
+  const tdStyle = { padding: '0.75rem', borderBottom: '1px solid #f3f4f6', textAlign: 'center' };
   
   const getSelectStyle = (status) => ({
     padding: '0.5rem',
@@ -127,8 +126,8 @@ function AllLeaveRequests() {
   return (
     <div style={pageWrapperStyle}>
       <div style={containerStyle}>
-        <h2 style={{ borderBottom: '2px solid #eee', paddingBottom: '1rem', marginBottom: '1rem' }}>
-          All Leave Requests
+        <h2 style={{ paddingBottom: '1rem', marginBottom: '1rem', color: '#1D351F' }}>
+          ALL LEAVE REQUESTS
         </h2>
         
         {error && (
@@ -144,11 +143,11 @@ function AllLeaveRequests() {
             <table style={tableStyle}>
               <thead>
                 <tr>
-                  <th style={thStyle}>Employee ID</th>
-                  <th style={thStyle}>Start Date</th>
-                  <th style={thStyle}>End Date</th>
-                  <th style={thStyle}>Reason</th>
-                  <th style={thStyle}>Status</th>
+                  <th style={thStyle}>EMPLOYEE ID</th>
+                  <th style={thStyle}>START DATE</th>
+                  <th style={thStyle}>END DATE</th>
+                  <th style={thStyle}>REASON</th>
+                  <th style={thStyle}>STATUS</th>
                 </tr>
               </thead>
               <tbody>

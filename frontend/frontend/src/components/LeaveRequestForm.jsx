@@ -95,18 +95,18 @@ function LeaveRequestForm() {
   };
 
   const divStyle = { marginBottom: '1rem', display: 'flex', flexDirection: 'column' };
-  const labelStyle = { fontWeight: '600', marginBottom: '0.5rem' };
+  const labelStyle = { fontWeight: '600', marginBottom: '0.5rem', color: '#325833' };
   const inputStyle = { padding: '0.75rem', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1rem', outline: 'none', backgroundColor: 'white' };
-  const buttonStyle = { padding: '0.75rem 1.5rem', border: 'none', borderRadius: '4px', backgroundColor: '#007bff', color: 'white', fontSize: '1rem', cursor: 'pointer', width: '100%', marginTop: '1rem' };
+  const buttonStyle = { padding: '0.75rem 1.5rem', border: 'none', borderRadius: '4px', backgroundColor: '#325833', color: 'white', fontSize: '1rem', cursor: 'pointer', width: '100%', marginTop: '1rem' };
 
   return (
     <div style={pageStyle}>
       <form onSubmit={handleSubmit} style={formStyle}>
-        <h2 style={{textAlign: 'center', marginBottom: '1.5rem'}}>Submit Leave Request</h2>
-        <p style={{textAlign: 'center', marginBottom: '2rem', color: '#555'}}>Please fill out your request details below.</p>
+        <h2 style={{textAlign: 'center', marginBottom: '1rem', color: '#1D351F'}}>Submit Leave Request</h2>
+        <p style={{textAlign: 'left', marginBottom: '1rem', color: '#555'}}>Please fill out your request details below.</p>
 
-        {message && <div style={{ padding: '10px', backgroundColor: '#d4edda', color: '#155724', borderRadius: '4px', marginBottom: '1rem' }}>{message}</div>}
-        {error && <div style={{ padding: '10px', backgroundColor: '#f8d7da', color: '#721c24', borderRadius: '4px', marginBottom: '1rem' }}>{error}</div>}
+        {message && <div style={{ textAlign: 'center', padding: '10px', backgroundColor: '#d4edda', color: '#155724', borderRadius: '4px', marginBottom: '1rem' }}>{message}</div>}
+        {error && <div style={{ textAlign: 'center', padding: '10px', backgroundColor: '#f8d7da', color: '#721c24', borderRadius: '4px', marginBottom: '1rem' }}>{error}</div>}
         <div style={divStyle}>
           <label style={labelStyle}>Employee:</label>
           <select

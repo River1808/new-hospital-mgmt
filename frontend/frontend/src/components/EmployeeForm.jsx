@@ -62,15 +62,15 @@ function EmployeeForm() {
     maxWidth: '500px', 
     boxShadow: '0 8px 32px rgba(0,0,0,0.1)', 
     borderRadius: '12px', 
-    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    backgroundColor: 'white',
     width: '100%',
     backdropFilter: 'blur(4px)'
   };
 
   const divStyle = { marginBottom: '1rem', display: 'flex', flexDirection: 'column' };
-  const labelStyle = { fontWeight: '600', marginBottom: '0.5rem', color: '#333' };
+  const labelStyle = { fontWeight: '600', marginBottom: '0.5rem', color: '#325833' };
   const inputStyle = { padding: '0.75rem', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1rem', backgroundColor: '#fff', outline: 'none' };
-  const buttonStyle = { padding: '0.75rem 1.5rem', border: 'none', borderRadius: '4px', backgroundColor: '#007bff', color: 'white', fontSize: '1rem', cursor: 'pointer', fontWeight: 'bold' };
+  const buttonStyle = { padding: '0.75rem 1.5rem', border: 'none', borderRadius: '4px', backgroundColor: '#325833', color: 'white', fontSize: '1rem', cursor: 'pointer', fontWeight: 'bold' };
   const checkboxDivStyle = { ...divStyle, flexDirection: 'row', alignItems: 'center', marginBottom: '1rem' };
   const checkboxLabelStyle = { ...labelStyle, marginBottom: '0', marginLeft: '0.5rem' };
   const checkboxInputStyle = { width: '1.25rem', height: '1.25rem' };
@@ -88,7 +88,7 @@ function EmployeeForm() {
       backgroundAttachment: 'fixed'
     }}>
       <form onSubmit={handleSubmit} style={formStyle}>
-        <h2 style={{ textAlign: 'center', marginBottom: '1.5rem', color: '#333' }}>Add New Employee</h2>
+        <h2 style={{ textAlign: 'center', marginBottom: '1.5rem', color: '#1d351f' }}>Add New Employee</h2>
 
         {message && (
           <div style={{ padding: '10px', backgroundColor: '#ffebee', color: '#c62828', borderRadius: '4px', marginBottom: '1rem' }}>
