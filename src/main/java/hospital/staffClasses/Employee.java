@@ -22,10 +22,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 })
 public abstract class Employee implements WorkSchedule {
 
-    private String databaseId;
-
     private int id;
-
     private String name;
     private String department;
     private String role;
@@ -39,10 +36,6 @@ public abstract class Employee implements WorkSchedule {
 
     public Employee() {
     }
-
-    // Getters and Setters
-    public String getDatabaseId() { return databaseId; }
-    public void setDatabaseId(String databaseId) { this.databaseId = databaseId; }
 
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }

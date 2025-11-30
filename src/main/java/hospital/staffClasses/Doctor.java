@@ -10,7 +10,6 @@ public class Doctor<S> extends Employee {
         super();
     }
 
-    // Constructor matching the super(id, name, department, role) requirement
     public Doctor(int id, String name, String department, String role) {
         super(id, name, department, role);
     }

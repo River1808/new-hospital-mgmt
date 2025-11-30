@@ -128,7 +128,11 @@ export default function Dashboard() {
       <Snowflakes />
 
       <div style={contentStyle}>
+<<<<<<< HEAD
         <h1 style={{ color: '#333', color: '#1D351F', marginTop: '0'}}>Hospital Schedule Management</h1>
+=======
+        <h1 style={{ color: '#333', marginTop: '0'}}>Hospital Schedule Management</h1>
+>>>>>>> fe6cc057f04764e16b6943193475581dd3ac7ce7
         <p style={{ color: '#555', fontSize: '1.1rem' }}>Choose an option:</p>
         
         <div>

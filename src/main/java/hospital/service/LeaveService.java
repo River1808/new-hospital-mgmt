@@ -1,5 +1,6 @@
 package hospital.service;
 
+import hospital.database.documents.LeaveRequestDocument;
 import hospital.schedule.LeaveRequest;
 import hospital.repository.LeaveRepo;
 
@@ -13,23 +14,23 @@ public class LeaveService {
         this.repo = repo;
     }
 
-    public List<LeaveRequest> getAll() {
+    public List<LeaveRequestDocument> getAll() {
         return repo.findAll();
     }
 
-    public LeaveRequest create(LeaveRequest r) {
+    public String create(LeaveRequest r) {
         if (r.getStatus() == null)
             r.setStatus("Pending");
 
-        repo.save(r);
-        return r;
+        // return MongoDB id
+        return repo.save(r);
     }
 
-    public void approve(String id) {
-        repo.updateStatus(id, "Approved");
+    public void approve(String dbId) {
+        repo.updateStatus(dbId, "Approved");
     }
 
-    public void reject(String id) {
-        repo.updateStatus(id, "Rejected");
+    public void reject(String dbId) {
+        repo.updateStatus(dbId, "Rejected");
     }
 }

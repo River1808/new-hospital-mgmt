@@ -127,7 +127,7 @@ function AllLeaveRequests() {
     <div style={pageWrapperStyle}>
       <div style={containerStyle}>
         <h2 style={{ paddingBottom: '1rem', marginBottom: '1rem', color: '#1D351F' }}>
-          ALL LEAVE REQUESTS
+          All Leave Requests
         </h2>
         
         {error && (

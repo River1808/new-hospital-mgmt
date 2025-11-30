@@ -1,23 +1,25 @@
 package hospital.mapper;
 
 import hospital.schedule.Shift;
+import hospital.database.documents.ShiftDocument;
 import org.bson.Document;
-import org.bson.types.ObjectId;
 
 public class ShiftMapper {
 
-    public static Shift fromDoc(Document doc) {
-        return new Shift(
-                doc.getObjectId("_id").toString(),
-                doc.getInteger("employeeId"),
-                doc.getDate("date"),
-                doc.getString("startTime"),
-                doc.getString("endTime"),
-                doc.getString("role")
-        );
+    // MongoDB Document → ShiftDocument
+    public static ShiftDocument toDocumentModel(Document doc) {
+        ShiftDocument d = new ShiftDocument();
+        d.setId(doc.getObjectId("_id").toHexString());
+        d.setEmployeeId(doc.getInteger("employeeId"));
+        d.setDate(doc.getDate("date"));
+        d.setStartTime(doc.getString("startTime"));
+        d.setEndTime(doc.getString("endTime"));
+        d.setRole(doc.getString("role"));
+        return d;
     }
 
-    public static Document toDoc(Shift s) {
+    // Domain → MongoDB Document
+    public static Document toDbDocument(Shift s) {
         return new Document()
                 .append("employeeId", s.getEmployeeId())
                 .append("date", s.getDate())
